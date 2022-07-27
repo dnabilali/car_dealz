@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Edit Car</title>
+</head>
+<body>
+    <div class="p-5 d-flex justify-content-between">
+        <h1>Edit {{one_car[0].model}}:</h1>
+        <div>
+            <a class="p-5" href="/profile/{{session['user_id']}}">Dashboard</a>
+            <a class="p-5" href="/logout">logout</a>
+        </div>
+    </div>
+    <form class="pl-5 w-50" action="/update/{{one_car[0].id}}" method="post">
+        {% with messages=get_flashed_messages(category_filter=['car']) %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{message}}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <div class="form-group">
+            <label for="price">Price:</label>
+            <input type="number" name="price" value="{{one_car[0].price}}">
+        </div>
+        <div class="form-group">
+            <label for="model">Model:</label>
+            <input type="text" class="form-control" name="model" value="{{one_car[0].model}}">
+        </div>
+        <div class="form-group">
+            <label for="network">Make:</label>
+            <input type="text" class="form-control" name="make" value="{{one_car[0].make}}">
+        </div>
+        <div class="form-group">
+            <label for="year">Year:</label>
+            <input type="number" name="year" value="{{one_car[0].year}}">
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea class="form-control" rows="3" name="description">{{one_car[0].description}}</textarea>
+        </div>  
+        <br>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+</body>
+</html>

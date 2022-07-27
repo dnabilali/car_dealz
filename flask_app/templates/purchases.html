@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchases</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
+        <h1 class="navbar-brand m-3">{{user.first_name}}'s Purchases:</h1>
+        <div class="my-2 my-lg-0 m-3">
+            <a href="/profile/{{session['user_id']}}" class="p-5">Dashboard</a>
+            <a class="p-5" href="/logout">Log Out</a>
+        </div>
+    </nav>
+    <div class="p-5 m-5">
+        {% if user.bought_cars[0].make == None %}
+            <p>You have not purchased any cars yet.</p>
+        {% else %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Make</th>
+                        <th scope="col">Model</th>
+                        <th scope="col">Year</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for one_car in user.bought_cars: %}
+                        <tr>
+                            <td>{{one_car.make}}</td>
+                            <td>{{one_car.model}}</td>
+                            <td>{{one_car.year}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+</body>
+</html>
